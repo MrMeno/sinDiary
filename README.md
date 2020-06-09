@@ -1,0 +1,2 @@
+# sinDiary
+simple wx project
