@@ -1,0 +1,34 @@
+.user-content{
+    color:black;
+    width: 100%;
+    height:auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+    font-family: 'PingFang', Courier, monospace;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    .user-item{
+        display: flex;
+        border:solid 1px red;
+        height: 120rpx;
+        flex-direction: row;
+        justify-content: space-around;
+        width: 100%;
+        .user-item-cell{
+               img{
+                   width: 120rpx;
+                   height:120rpx;
+                   border-radius: 10rpx;
+               }
+        }
+        &.double{
+            height: 240rpx;
+        }
+        &.auto{
+            height: auto;
+        }
+    }
+    
+}
