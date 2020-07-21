@@ -1,20 +1,31 @@
 let self=null;
+
 export default{
     data(){
         return {
-          motto: 'Hello miniprograme',
           userInfo: {}
         }
       },
       methods:{
-     
+        goSsetting(){
+          wx.navigateTo({
+            url: '../setting/main',
+          })
+        }
       },
       created () {
         self=this;
-        if (mpvuePlatform === 'my') {}
-        else{
-        self.userInfo= mpvue.getStorageSync('userInfo') || []
-        console.log(self.userInfo)
-        }
+        wx.getUserInfo({
+          success(res) {
+            self.userInfo=res.userInfo;
+          },
+          fail(error) {
+            console.log(error)
+          }
+        })
+      
+      },
+      mounted(){
+        
       }
 };

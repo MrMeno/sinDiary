@@ -1,4 +1,5 @@
-import card from '@/components/card'
+import card from '@/components/card';
+import mpButton from './mpvue-weui/src/button';
 export default{
   data () {
     return {
@@ -11,7 +12,7 @@ export default{
   },
 
   components: {
-    card
+    card,mpButton
   },
 
   methods: {
