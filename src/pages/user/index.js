@@ -7,11 +7,7 @@ export default{
         }
       },
       methods:{
-        goSsetting(){
-          wx.navigateTo({
-            url: '../setting/main',
-          })
-        }
+ 
       },
       created () {
         self=this;

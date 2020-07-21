@@ -75,5 +75,4 @@ export default {
 
 <style lang='less'>
  @import './style/common.less';
-  @import '../node_modules/mpvue-weui/src/style/weui.css';
 </style>
