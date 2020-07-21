@@ -1,54 +1,79 @@
 <script>
+import { resolve,reject } from 'q';
+let that = null;
 export default {
   created () {
-    // 调用API从本地缓存中获取数据
-    /*
-     * 平台 api 差异的处理方式:  api 方法统一挂载到 mpvue 名称空间, 平台判断通过 mpvuePlatform 特征字符串
-     * 微信：mpvue === wx, mpvuePlatform === 'wx'
-     * 头条：mpvue === tt, mpvuePlatform === 'tt'
-     * 百度：mpvue === swan, mpvuePlatform === 'swan'
-     * 支付宝(蚂蚁)：mpvue === my, mpvuePlatform === 'my'
-     */
-    let logs
-    if (mpvuePlatform === 'my') {
-      logs = mpvue.getStorageSync({key: 'logs'}).data || []
-      logs.unshift(Date.now())
-      mpvue.setStorageSync({
-        key: 'logs',
-        data: logs
-      })
-    } else {
-      logs = mpvue.getStorageSync('logs') || []
-      logs.unshift(Date.now())
-     // mpvue.setStorageSync('logs', logs)
-          wx.getUserInfo({
-      success (res) {
-        mpvue.setStorageSync('userInfo', res.userInfo)
-      }
-    });
-    }
+  that=this;
+   wx.cloud.init({
+     env: 'sinorita-test',
+     traceUser: true
+    })
+    that.login();
   },
-  log () {
-    console.log(`log at:${Date.now()}`)
+  methods: {
+    getUserInfo: function(e) {
+    return new Promise((resolve,reject)=>{
+      wx.getSetting({
+      success(res) {
+       if (res.authSetting['scope.userInfo']) {
+          console.log("已授权=====")
+          wx.getUserInfo({
+            success(res) {
+              resolve(res.userInfo);
+            },
+            fail(res) {
+              reject(res);
+            }
+          })
+        } else {
+          that.showSettingToast("请授权")
+            reject('未授权=====');
+        }
+      }
+    })
+    })
+  },
+  login(){
+   wx.cloud.callFunction(
+      {
+        name:'getOpenId',
+        complete:result=>{
+            if(result.errMsg=='cloud.callFunction:ok'){
+               that.getUserInfo().then((res)=>{
+                if(res){
+                  let appid=result.result.appid||'';
+                let openid=result.result.openid||'';
+                wx.setStorageSync('appid', appid);
+                wx.setStorageSync('openid', openid);
+                }
+                else{
+                   that.showSettingToast("获取用户信息失败，请重试")
+                }
+             })
+         }
+      }}
+    );
+  },
+  showSettingToast: function(e) {
+    wx.showModal({
+      title: '提示！',
+      confirmText: '去设置',
+      showCancel: false,
+      content: e,
+      success: function(res) {
+        if (res.confirm) {
+          wx.navigateTo({
+            url: '/pages/setting/main',
+          })
+        }
+      }
+    })
   }
+  },
 }
 </script>
 
-<style>
-.container {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  padding: 200rpx 0;
-  box-sizing: border-box;
-}
-/* this rule will be remove */
-* {
-  transition: width 2s;
-  -moz-transition: width 2s;
-  -webkit-transition: width 2s;
-  -o-transition: width 2s;
-}
+<style lang='less'>
+ @import './style/common.less';
+  @import '../node_modules/mpvue-weui/src/style/weui.css';
 </style>
