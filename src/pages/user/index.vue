@@ -71,7 +71,22 @@
                <div class="cell-line">
                   <i class="icon iconfont icon-info"></i>
                   <label class="normal-font">
-                    宠物信息
+                    订单
+                 </label>
+               </div>
+            </div>
+            <div class="user-item-cell content">
+            </div>
+            <div class="user-item-cell arrow">
+               <i class="iconfont icon-next"></i>
+            </div>
+         </navigator>
+         <navigator class="user-item auto">
+            <div class="user-item-cell title">
+               <div class="cell-line">
+                  <i class="icon iconfont icon-camera"></i>
+                  <label class="normal-font">
+                    大师球
                  </label>
                </div>
             </div>
@@ -85,7 +100,7 @@
       <navigator class="user-item auto">
          <div class="user-item-cell title">
             <div class="cell-line">
-               <i class="icon iconfont icon-setting"></i>
+               <i class="icon iconfont icon-address"></i>
                <label class="normal-font">
                    地址
                  </label>
@@ -105,6 +120,5 @@
 </script>
 <style lang="less" scoped>
    @import '../../style/common.less';
-   @import "../../../static/icon/iconfont.css";
    @import './index.less';
 </style>

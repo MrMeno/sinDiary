@@ -1,5 +1,4 @@
 let self=null;
-
 export default{
     data(){
         return {

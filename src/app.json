@@ -1,14 +1,14 @@
 {
   "pages": [
     "pages/index/main",
-    "pages/logs/main",
+    "pages/community/main",
     "pages/counter/main",
     "pages/user/main",
     "pages/setting/main"
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#fff",
+    "navigationBarBackgroundColor": "#eee",
     "navigationBarTitleText": "Sinorita",
     "navigationBarTextStyle": "black"
   },
@@ -24,8 +24,8 @@
       "iconPath": "static/tabs/home.png",
       "selectedIconPath": "static/tabs/home-active.png"
     }, {
-      "text": "订单",
-      "pagePath": "pages/logs/main",
+      "text": "社区",
+      "pagePath": "pages/community/main",
       "iconPath": "static/tabs/order.png",
       "selectedIconPath": "static/tabs/order-active.png"
     },
@@ -43,8 +43,8 @@
       "icon": "static/tabs/home.png",
       "activeIcon": "static/tabs/home-active.png"
     }, {
-      "name": "订单",
-      "pagePath": "pages/logs/main",
+      "name": "社区",
+      "pagePath": "pages/community/main",
       "icon": "static/tabs/order.png",
       "activeIcon": "static/tabs/order-active.png"
     },
